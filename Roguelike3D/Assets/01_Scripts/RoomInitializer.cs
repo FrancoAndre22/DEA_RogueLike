@@ -26,15 +26,15 @@ public class RoomInitializer : MonoBehaviour
         currentEnemies = Mathf.Max(maxEnemies, level);
         PlayerPrefs.SetInt("Weapon", 0);
         int weapon = PlayerPrefs.GetInt("Weapon");
-        //int enemyCount = Mathf.Min(maxEnemies, level); // Incrementa la cantidad de enemigos según el nivel
+        //int enemyCount = Mathf.Min(maxEnemies, level); // Incrementa la cantidad de enemigos segï¿½n el nivel
         //SpawnEnemies(enemyCount);
-        // lógica adicional para modificar la habitación según el nivel
+        // lï¿½gica adicional para modificar la habitaciï¿½n segï¿½n el nivel
     }
 
     public void EnemyKilled()
     {
         currentEnemies--;
-        if(currentEnemies <= 0)
+        if (currentEnemies <= 0)
         {
             foreach (var door in openedDoors)
             {
@@ -137,18 +137,17 @@ public class RoomInitializer : MonoBehaviour
         {
             if (roomType == RoomType.NormalRoom)
             {
-                Debug.Log("name " + gameObject.name);
                 foreach (var door in openedDoors)
                 {
                     CloseWall(door);
-                }// Incrementa la cantidad de enemigos según el nivel
+                }// Incrementa la cantidad de enemigos segun el nivel
                 StartCoroutine(SpawnEnemies(currentEnemies));
             }
-        }
-        else if (roomType == RoomType.BossRoom)
-        {
-            int boss = Random.Range(0, finalBosses.Count);
-            Instantiate(finalBosses[boss], transform.position, Quaternion.identity);
+            else if (roomType == RoomType.BossRoom)
+            {
+                int boss = Random.Range(0, finalBosses.Count);
+                Instantiate(finalBosses[boss], transform.position, Quaternion.identity);
+            }
         }
     }
 }
