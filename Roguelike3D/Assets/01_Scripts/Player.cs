@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     public float speed = 4;
     Vector2 dir = Vector2.zero;
     public float shield = 2;
+    [Header("CurrentHealthText")]
+    public Text healthText;
     public float hp = 3;
     public float timer = 0;
     public float timeBtwShoot = 0.5f;
@@ -46,7 +49,15 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        UpdateHealthUI();
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthText != null)
+        {
+            healthText.text = "HP: " + hp.ToString();
+        }
     }
 
     void Update()
@@ -62,6 +73,7 @@ public class Player : MonoBehaviour
         }
         CheckIfCanShoot();
         Shoot();
+        UpdateHealthUI();
     }
 
     void Move()
@@ -119,7 +131,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
-        hp-= dmg;
+        hp -= dmg;
         if (hp <= 0)
         {
             SceneManager.LoadScene("Game");

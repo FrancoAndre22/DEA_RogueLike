@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ProceduralLevelManager : MonoBehaviour
 {
+    [Header("CurrentLevelText")]
+    public Text levelText;
     public int level = 1;
     public int initialRoomCount = 10;
     public List<RoomInitializer> roomPrefabs;
@@ -11,6 +14,13 @@ public class ProceduralLevelManager : MonoBehaviour
     private Dictionary<Vector2Int, RoomInitializer> generatedRooms = new Dictionary<Vector2Int, RoomInitializer>();
     public static ProceduralLevelManager instance;
 
+    void UpdateLevelUI()
+    {
+        if (levelText != null)
+        {
+            levelText.text = "level: " + level.ToString();
+        }
+    }
     void Awake()
     {
         if(instance == null)
@@ -22,6 +32,12 @@ public class ProceduralLevelManager : MonoBehaviour
     private void Start()
     {
         GenerateLevel(level); // Empieza en el nivel 1
+        UpdateLevelUI();
+    }
+
+    void Update()
+    {
+        UpdateLevelUI();
     }
 
     public void UpdateLevel()
@@ -57,7 +73,7 @@ public class ProceduralLevelManager : MonoBehaviour
         List<Vector2Int> positions = new List<Vector2Int>();
         HashSet<Vector2Int> occupiedPositions = new HashSet<Vector2Int>();
 
-        // Generar la posición inicial
+        // Generar la posiciï¿½n inicial
         Vector2Int startPos = Vector2Int.zero;
         positions.Add(startPos);
         occupiedPositions.Add(startPos);
@@ -90,7 +106,7 @@ public class ProceduralLevelManager : MonoBehaviour
         foreach (Vector2Int pos in roomPositions)
         {
             RoomInitializer roomPrefab = roomPrefabs[Random.Range(0, roomPrefabs.Count)];
-            Vector3 roomPosition = new Vector3(pos.x * 10, 0, pos.y * 10); // Ajustar según el tamaño de la habitación
+            Vector3 roomPosition = new Vector3(pos.x * 10, 0, pos.y * 10); // Ajustar segï¿½n el tamaï¿½o de la habitaciï¿½n
             RoomInitializer room = Instantiate(roomPrefab, roomPosition, Quaternion.identity);
             if (firstRoom )
             {
@@ -109,7 +125,7 @@ public class ProceduralLevelManager : MonoBehaviour
                 }
             }
             generatedRooms.Add(pos, room);
-            // Inicializar la habitación según el nivel actual
+            // Inicializar la habitaciï¿½n segï¿½n el nivel actual
             //room.InitializeRoom(level);
         }
         if (level % 5 == 0)
