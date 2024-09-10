@@ -140,7 +140,7 @@ public class RoomInitializer : MonoBehaviour
                 foreach (var door in openedDoors)
                 {
                     CloseWall(door);
-                }// Incrementa la cantidad de enemigos segun el nivel
+                }
                 StartCoroutine(SpawnEnemies(currentEnemies));
             }
             else if (roomType == RoomType.BossRoom)
