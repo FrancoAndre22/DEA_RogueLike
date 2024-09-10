@@ -26,6 +26,9 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(type == EnemyType.Boss){
+            ProceduralLevelManager.instance.UpdateLevel();
+        }
         myRoom.EnemyKilled();
         if(target != null )
             target.GetComponent<Player>().targets.Remove(this);
@@ -87,6 +90,12 @@ public class Enemy : MonoBehaviour
                     SearchTarget();
                     MoveForward();
                 }
+                break;
+            case EnemyType.Boss:
+                MoveForward();
+                RotateToTarget();
+                RadialShoot();
+                ArcShoot();
                 break;
         }
         if (!targetInRange)
@@ -231,5 +240,6 @@ public enum EnemyType
     RadialShoot,
     Sniper,
     Kamikase,
-    ArcShoot
+    ArcShoot,
+    Boss
 }
