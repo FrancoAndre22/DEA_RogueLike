@@ -2315,10 +2315,11 @@ MonoBehaviour:
   - {fileID: 649702525171919086, guid: 2f7722479a47ab141a3817326bb409fa, type: 3}
   - {fileID: 649702525171919086, guid: 328f49fdb8a68b245bb49e4db730ed4b, type: 3}
   - {fileID: 649702525171919086, guid: bcb4aad788b51c34c8529d2491571823, type: 3}
-  - {fileID: 649702525171919086, guid: c06562c289d84fc40b9904bcaf99ff29, type: 3}
+  - {fileID: 2382436007882929062, guid: 61768e17db89ba142b7086b87221266e, type: 3}
   - {fileID: 649702525171919086, guid: 29a25c4753ae69644bbf904b7ef38f3d, type: 3}
   exitPrefab: {fileID: 47316531949033103, guid: bb1f4d472be288944b0dcbeff44fdb7a, type: 3}
-  finalBosses: []
+  finalBosses:
+  - {fileID: 3465361262577755305, guid: c06562c289d84fc40b9904bcaf99ff29, type: 3}
   spawnPoints:
   - {fileID: 3197663712919153252}
   - {fileID: 4911274910513014456}
