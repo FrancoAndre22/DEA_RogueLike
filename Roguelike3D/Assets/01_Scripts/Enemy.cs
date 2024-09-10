@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
+    public GameObject powerUpPrefab;
     public EnemyType type;
     public float speed = 6;
     public float hp = 2f;
@@ -32,6 +33,30 @@ public class Enemy : MonoBehaviour
         myRoom.EnemyKilled();
         if(target != null )
             target.GetComponent<Player>().targets.Remove(this);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        hp -= amount;
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        DropPowerUp();
+        Destroy(gameObject);
+    }
+
+    void DropPowerUp()
+    {
+        if (powerUpPrefab != null)
+        {
+            // Randomize the power-up that drops, or assign a specific one
+            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     void Awake()
@@ -224,14 +249,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float dmg)
-    {
-        hp-= dmg;
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+
 }
 
 public enum EnemyType

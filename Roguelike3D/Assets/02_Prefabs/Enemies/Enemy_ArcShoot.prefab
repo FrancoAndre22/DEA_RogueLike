@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81452cddf6e605c42a865abee336579f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 6856980972204756172, guid: 89bbe4538e9e5534db8950b76a650165, type: 3}
   type: 4
   speed: 5
   hp: 3

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public float speed = 4;
     Vector2 dir = Vector2.zero;
+    public float shield = 2;
     public float hp = 3;
     public float timer = 0;
     public float timeBtwShoot = 0.5f;
@@ -123,5 +125,40 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene("Game");
             //Destroy(gameObject);
         }
+    }
+
+    public void IncreaseAttackSpeed(float amount, float duration)
+    {
+        timeBtwShoot += amount;
+        StartCoroutine(RemoveBuffAfterDuration(() => timeBtwShoot -= amount, duration));
+    }
+
+    public void IncreaseDamage(float amount, float duration)
+    {
+        damage += amount;
+        StartCoroutine(RemoveBuffAfterDuration(() => damage -= amount, duration));
+    }
+
+    public void IncreaseHealth(float amount)
+    {
+        hp += amount;
+    }
+
+    public void IncreaseShield(float amount, float duration)
+    {
+        shield += amount;
+        StartCoroutine(RemoveBuffAfterDuration(() => shield -= amount, duration));
+    }
+
+    public void IncreaseMovementSpeed(float amount, float duration)
+    {
+        speed += amount;
+        StartCoroutine(RemoveBuffAfterDuration(() => speed -= amount, duration));
+    }
+
+    private IEnumerator RemoveBuffAfterDuration(Action removeBuffAction, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        removeBuffAction();
     }
 }
